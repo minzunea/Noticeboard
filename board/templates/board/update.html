@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoticeBoard</title>
+</head>
+<body>
+    <!-- 헤드라인 -->
+    <div><h1><a href='/NoticeBoard'>NoticeBoard</a></h1></div>
+
+    <!-- 본문  -->
+    <div>
+        <form action="{% url 'update' text_id %}" method="post">
+            {% csrf_token %}
+            <div>
+                <input type='text' name='ftitle' value={{text_list.text_title}} placeholder="title">
+                <input type='text' name="fcreater" value={{text_list.creater}} placeholder="who?">
+                <textarea name='ftext_body' placeholder="content" cols="60" rows="10">{{text_list.text_body}}</textarea>
+            </div>
+
+            <div>
+                <!-- 글 제출 버튼 -->
+                <input type="submit" value="수정하기">
+            </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoticeBoard</title>
+</head>
+<body>
+    <!-- 헤드라인 -->
+    <div>
+        <h1><a href='/NoticeBoard'>NoticeBoard</a></h1>    </div>
+
+    <!-- 본문  -->
+    <div>
+        <form action="{% url 'create' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <input type='text' name='ftitle' placeholder="title">
+                <input type='text' name="fcreater" placeholder="who?">
+            </div>
+
+            <div>
+                <textarea name='ftext_body' placeholder="content" cols="60" rows="10"></textarea>
+            </div>
+
+            <div>
+                <!-- 글 제출 버튼 -->
+                <input type="submit" value="글쓰기">
+            </div>
+    </div>
+</body>
+</html>

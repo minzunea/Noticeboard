@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoticeBoard</title>
+</head>
+<body>
+    <!-- 헤드라인 -->
+    <div>
+        <h1><a href='/NoticeBoard'>NoticeBoard</a></h1>    </div>
+    <!-- 본문  -->
+    <div>
+        <h2>{{text_list.text_title}}</h2>
+        <p>{{text_list.text_body}}</p>
+    <!-- 삭제, 수정 버튼  -->
+        <div>
+            <button type="button" onClick="location.href='update'">수정</button>
+            <form action="{% url 'delete' text_id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">삭제</button>
+            </form>
+        </div>
+    </div>
+    <!-- 댓글  -->
+    <div>
+        <ul>
+            {% if comment_list %}
+	        <ul>
+                {% for comment_text in comment_list %}
+                    <li>{{ comment_text }}</li>
+                {% endfor %}
+	        </ul>
+            {% else %}
+                <p>No comment are available.</p>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- 댓글 작성-->
+    <div>
+        <form action="{% url 'comment_create' text_id %}" method="post">
+            {% csrf_token %}
+            <input type='text' name='fcomment' placeholder="comment">
+            <button type="submit">댓글작성</button>
+        </form>
+    </div>
+</body>
+</html>
