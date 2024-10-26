@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoticeBoard</title>
-</head>
-<body>
-    <!-- 헤드라인 -->
-    <div><h1><a href='/NoticeBoard'>NoticeBoard</a></h1></div>
+{% extends 'board/base.html'  %}
 
+<!-- headline -->
+{% block headline %}
+<div>
+    <h1><a href='/NoticeBoard'>NoticeBoard</a></h1>
+</div>
+{% endblock %}
+
+{%block contents%}
     <!-- 본문  -->
     <div>
         <form action="{% url 'update' text_id %}" method="post">
@@ -24,5 +23,4 @@
                 <input type="submit" value="수정하기">
             </div>
     </div>
-</body>
-</html>
+{% endblock %}
