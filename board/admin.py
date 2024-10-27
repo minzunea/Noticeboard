@@ -7,3 +7,5 @@ class CreateAdmin(admin.ModelAdmin):
 
 admin.site.register(Create, CreateAdmin)
 admin.site.register(Comment)
+
+
