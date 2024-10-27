@@ -10,7 +10,7 @@
 {%block contents%}
 <!-- 본문  -->
 <div>
-    <form action="{% url 'create' %}" method="post">
+    <form action="{% url 'noticeboard:create' %}" method="post">
         {% csrf_token %}
         <div>
             <input type='text' name='ftitle' placeholder="title">

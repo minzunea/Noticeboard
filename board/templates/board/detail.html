@@ -15,7 +15,7 @@
     <!-- 삭제, 수정 버튼  -->
         <div>
             <button type="button" onClick="location.href='update'">수정</button>
-            <form action="{% url 'delete' text_id %}" method="post">
+            <form action="{% url 'noticeboard:delete' text_id %}" method="post">
                 {% csrf_token %}
                 <button type="submit">삭제</button>
             </form>
@@ -37,7 +37,7 @@
     </div>
     <!-- 댓글 작성-->
     <div>
-        <form action="{% url 'comment_create' text_id %}" method="post">
+        <form action="{% url 'noticeboard:comment_create' text_id %}" method="post">
             {% csrf_token %}
             <input type='text' name='fcomment' placeholder="comment">
             <button type="submit">댓글작성</button>

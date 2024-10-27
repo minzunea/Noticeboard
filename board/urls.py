@@ -1,6 +1,8 @@
 from django.urls import path, include
 from board import views
 
+app_name ="noticeboard"
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('<int:text_id>/', views.detail, name='detail'),

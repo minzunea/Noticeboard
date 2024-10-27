@@ -15,7 +15,7 @@
         {% if text_list %}
         <ul>
             {% for text in text_list %}
-                <li><a href="{% url 'detail' text.id %}">{{ text.text_title }}</a></li>
+                <li><a href="{% url 'noticeboard:detail' text.id %}">{{ text.text_title }}</a></li>
             {% endfor %}
         </ul>
         {% else %}
@@ -26,7 +26,7 @@
 
 <!-- 글 작성 버튼 -->
 <div>
-    <form action="{% url 'create' %}" method="get">
+    <form action="{% url 'noticeboard:create' %}" method="get">
         <p>
             {% csrf_token %}
             <input type="submit" value="글쓰기">

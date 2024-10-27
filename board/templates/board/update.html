@@ -10,7 +10,7 @@
 {%block contents%}
     <!-- 본문  -->
     <div>
-        <form action="{% url 'update' text_id %}" method="post">
+        <form action="{% url 'noticeboard:update' text_id %}" method="post">
             {% csrf_token %}
             <div>
                 <input type='text' name='ftitle' value={{text_list.text_title}} placeholder="title">
