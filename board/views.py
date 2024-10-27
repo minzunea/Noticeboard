@@ -53,7 +53,6 @@ def comment_create(request, text_id):
     if request.method == "POST":
         create_instance = get_object_or_404(Create, pk=text_id)
         new_comment = Comment.objects.create(comment_id=create_instance, comment_text=request.POST['fcomment'])
-        new_comment.save()
         return redirect(f'/NoticeBoard/{text_id}')
 
     else:
