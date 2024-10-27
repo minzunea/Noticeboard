@@ -1,9 +1,9 @@
 from django.contrib import admin
+from .models import Create, Comment
 
-# Register your models here.
 
-from .models import Create
-admin.site.register(Create)
+class CreateAdmin(admin.ModelAdmin):
+    search_fields = ['text_title']
 
-from .models import Comment
+admin.site.register(Create, CreateAdmin)
 admin.site.register(Comment)
