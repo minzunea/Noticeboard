@@ -1,21 +1,14 @@
 {% extends 'base.html'  %}
 
-<!-- headline -->
-{% block headline %}
-<div>
-    <h1><a href='/NoticeBoard'>NoticeBoard</a></h1>
-</div>
-{% endblock %}
-
 {%block contents%}
     <!-- 본문  -->
     <div>
         <form action="{% url 'noticeboard:update' text_id %}" method="post">
             {% csrf_token %}
             <div>
-                <input type='text' name='ftitle' value={{text_list.text_title}} placeholder="title">
-                <input type='text' name="fcreater" value={{text_list.creater}} placeholder="who?">
-                <textarea name='ftext_body' placeholder="content" cols="60" rows="10">{{text_list.text_body}}</textarea>
+                <input type='text' name='ftitle' value={{text_list.title}} placeholder="title">
+                <input type='text' name="fauthor" value={{text_list.author}} placeholder="who?">
+                <textarea name='fcontents' placeholder="content" cols="60" rows="10">{{text_list.contents}}</textarea>
             </div>
 
             <div>

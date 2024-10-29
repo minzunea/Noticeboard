@@ -10,8 +10,8 @@
 {%block contents%}
     <!-- 본문  -->
     <div>
-        <h2>{{text_list.text_title}}</h2>
-        <p>{{text_list.text_body}}</p>
+        <h2>{{text_list.title}} - ({{text_list.create_date}})</h2>
+        <p>{{text_list.contents}}</p>
     <!-- 삭제, 수정 버튼  -->
         <div>
             <button type="button" onClick="location.href='update'">수정</button>
@@ -26,8 +26,8 @@
         <ul>
             {% if comment_list %}
 	        <ul>
-                {% for comment_text in comment_list %}
-                    <li>{{ comment_text }}</li>
+                {% for comment in comment_list %}
+                    <li>{{ comment.contents }} - ({{comment.create_date}})</li>
                 {% endfor %}
 	        </ul>
             {% else %}

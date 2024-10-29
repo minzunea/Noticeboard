@@ -1,12 +1,5 @@
 {% extends 'base.html'  %}
 
-<!-- headline -->
-{% block headline %}
-<div>
-    <h1><a href='/NoticeBoard'>NoticeBoard</a></h1>
-</div>
-{% endblock %}
-
 {%block contents%}
 <!-- 본문  -->
 <div>
@@ -14,11 +7,11 @@
         {% csrf_token %}
         <div>
             <input type='text' name='ftitle' placeholder="title">
-            <input type='text' name="fcreater" placeholder="who?">
+            <input type='text' name="fauthor" placeholder="who?">
         </div>
 
         <div>
-            <textarea name='ftext_body' placeholder="content" cols="60" rows="10"></textarea>
+            <textarea name='fcontents' placeholder="content" cols="60" rows="10"></textarea>
         </div>
 
         <div>
