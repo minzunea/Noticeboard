@@ -1,22 +1,22 @@
 {% extends 'base.html'  %}
 
+
 {%block contents%}
 <!-- 본문  -->
-<div>
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">글쓰기</h5>
     <form action="{% url 'noticeboard:create' %}" method="post">
         {% csrf_token %}
-        <div>
-            <input type='text' name='ftitle' placeholder="title">
-            <input type='text' name="fauthor" placeholder="who?">
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" id="title"
+                value="{{ form.title.value|default_if_none:'' }}">
         </div>
-
-        <div>
-            <textarea name='fcontents' placeholder="content" cols="60" rows="10"></textarea>
+        <div class="mb-3">
+            <label for="contents" class="form-label">내용</label>
+            <textarea name="contents" id="contents" class="form-control" rows="10">{{ form.contents.value|default_if_none:'' }}</textarea>
         </div>
-
-        <div>
-            <!-- 글 제출 버튼 -->
-            <input type="submit" value="글쓰기">
-        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
 </div>
 {% endblock %}

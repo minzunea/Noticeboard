@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Create, Comment
-from django.core.paginator import Paginator  
+from django.core.paginator import Paginator
+from .forms import CreateForm 
 
 
 def index(request):
@@ -20,30 +21,31 @@ def detail(request, text_id):
     return render(request, 'board/detail.html', content)
 
 def create(request):
-    if request.method == "POST":
-       create = Create()
-       create.title = request.POST['ftitle']
-       create.contents = request.POST['fcontents']
-       create.author = request.POST['fauthor']
-       create.save()  
-       return redirect(f'/NoticeBoard/{create.id}')
-   
+    if request.method == "POST": 
+       form = CreateForm(request.POST)
+       if form.is_valid():
+           post = form.save(commit=False)
+           post = form.save()
+           return redirect(f'/NoticeBoard/{post.id}')
     else:
-        return render(request, 'board/create.html')
+        form = CreateForm()
+        context = {'form':form}
+        return render(request, 'board/create.html',context)
     
 def update(request, text_id):
     text_list = get_object_or_404(Create, pk=text_id)
     if request.method == "GET":
-        content={'text_list':text_list,
-                'text_id':text_id}
+        form = CreateForm(instance=text_list)
+        content = {'form':form,
+                   'text_id':text_id}
         return render(request, 'board/update.html', content)
     
     else:
-        text_list.title = request.POST['ftitle']
-        text_list.contents = request.POST['fcontents']
-        text_list.author = request.POST['fauthor']
-        text_list.save()
-        return redirect(f'/NoticeBoard/{text_id}')
+        form = CreateForm(request.POST, instance=text_list)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post = form.save()
+        return redirect(f'/NoticeBoard/{post.id}')
     
 def delete(request, text_id):
     delete_notice = get_object_or_404(Create, pk=text_id)

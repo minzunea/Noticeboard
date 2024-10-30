@@ -3,15 +3,15 @@
 {%block contents%}
 
 <!-- 글 목차  -->
-<div class="container my-3">
-    <div class="row g-3">
+<div class="container my-4">
+    <div class="row g-4">
         {% if text_list %}
             {% for text in text_list %}
             <div class="card shadow-sm">
                 <div class="card-body">
                     <p class="card-text">{{ text.title }}</p>
                     <hr>
-                    <p class="card-text">{{ text.contents }}</p>
+                    <p class="card-text">{{ text.contents|truncatechars:45 }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='{% url 'noticeboard:detail' text.id %}'" >View</button>
@@ -27,12 +27,10 @@
     </div>
 
     <!-- 글 작성 버튼 -->
-    <div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <form action="{% url 'noticeboard:create' %}" method="get">
-            <p>
-                {% csrf_token %}
-                <input type="submit" value="글쓰기">
-            </p>
+            {% csrf_token %}
+            <input type="submit" value="글쓰기" class="btn btn-primary float-right my-3">
         </form>
     </div>
 

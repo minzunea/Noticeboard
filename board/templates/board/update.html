@@ -1,19 +1,21 @@
 {% extends 'base.html'  %}
 
 {%block contents%}
-    <!-- 본문  -->
-    <div>
-        <form action="{% url 'noticeboard:update' text_id %}" method="post">
-            {% csrf_token %}
-            <div>
-                <input type='text' name='ftitle' value={{text_list.title}} placeholder="title">
-                <input type='text' name="fauthor" value={{text_list.author}} placeholder="who?">
-                <textarea name='fcontents' placeholder="content" cols="60" rows="10">{{text_list.contents}}</textarea>
-            </div>
-
-            <div>
-                <!-- 글 제출 버튼 -->
-                <input type="submit" value="수정하기">
-            </div>
-    </div>
+<!-- 본문  -->
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">수정하기</h5>
+    <form action="{% url 'noticeboard:update' text_id %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" id="title"
+                value="{{form.title.value}}">
+        </div>
+        <div class="mb-3">
+            <label for="contents" class="form-label">내용</label>
+            <textarea name="contents" id="contents" class="form-control" rows="10">{{form.contents.value}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
 {% endblock %}
