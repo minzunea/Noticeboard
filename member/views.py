@@ -22,8 +22,11 @@ def login_view(request):
                 auth.login(request, user)
                 return redirect('/NoticeBoard')
         
-        return redirect('member:login')
-    
+        else:
+            non_error = form.non_field_errors
+            context = {'non_error':non_error,'form':form}
+            return render(request, 'member/login.html', context)
+            
     else:
         form = AuthenticationForm()
         context = {'form' : form}
@@ -42,10 +45,10 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
-            return redirect('/NoticeBoard')
-        return redirect('member:signup')
-    
+            return redirect('/NoticeBoard')    
+
     else:
         form = UserCreationForm()
-        context = {'form' : form}
-        return render(request, 'member/signup.html', context)
+        
+    return render(request, 'member/signup.html', {'form':form})
+    

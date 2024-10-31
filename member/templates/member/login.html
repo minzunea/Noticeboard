@@ -4,6 +4,25 @@
 <div class="container my-3">
     <form action="{% url 'member:login' %}" method="POST">
         {% csrf_token %}
+        <!-- error -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for input_field in form %}
+            {% if input_field.errors %}
+            <div>
+                {{input_field.label}} : {{input_field.errors}}
+            </div>
+            {% endif %}
+            {% endfor %}
+
+            {% for error in non_error %}
+            <div>
+                {{error}}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- input_field -->
         <div class="mb-3">
             <label for="username">사용자ID</label>
             <input type="text" class="form-control" name="username" id="username">
@@ -16,3 +35,20 @@
     </form>
 </div>
 {%endblock%}
+
+<ul class="errorlist">
+    
+    <li>username
+        <ul class="errorlist">
+            <li>필수 항목입니다.</li>
+        </ul>
+    </li>
+
+    <li>password
+        <ul class="errorlist">
+                <li>필수 항목입니다.</li>
+        </ul>
+    </li>
+
+</ul>
+    
