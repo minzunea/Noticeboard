@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Create, Comment
 from django.core.paginator import Paginator
-from .forms import CreateForm 
-
+from .forms import CreateForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     page = request.GET.get('page', '1') # 페이지 구현
@@ -20,18 +20,21 @@ def detail(request, text_id):
                'text_id': text_id}
     return render(request, 'board/detail.html', content)
 
+@login_required(login_url='member:login')
 def create(request):
     if request.method == "POST": 
        form = CreateForm(request.POST)
        if form.is_valid():
            post = form.save(commit=False)
+           post.author = request.user
            post = form.save()
-           return redirect(f'/NoticeBoard/{post.id}')
+           return redirect(f'/NoticeBoard/{post.id}') 
     else:
         form = CreateForm()
         context = {'form':form}
         return render(request, 'board/create.html',context)
-    
+
+@login_required(login_url='member:login')
 def update(request, text_id):
     text_list = get_object_or_404(Create, pk=text_id)
     if request.method == "GET":
@@ -46,7 +49,8 @@ def update(request, text_id):
             post = form.save(commit=False)
             post = form.save()
         return redirect(f'/NoticeBoard/{post.id}')
-    
+
+@login_required(login_url='member:login')
 def delete(request, text_id):
     delete_notice = get_object_or_404(Create, pk=text_id)
     delete_notice.delete()

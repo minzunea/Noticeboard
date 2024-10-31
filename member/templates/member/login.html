@@ -4,6 +4,7 @@
 <div class="container my-3">
     <form action="{% url 'member:login' %}" method="POST">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         <!-- error -->
         {% if form.errors %}
         <div class="alert alert-danger" role="alert">

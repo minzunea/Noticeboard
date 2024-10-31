@@ -20,7 +20,11 @@ def login_view(request):
             )
             if user is not None:
                 auth.login(request, user)
-                return redirect('/NoticeBoard')
+                next_value = request.GET.get("next")
+                if next_value:
+                    return redirect(next_value)
+                else:
+                    return redirect('/NoticeBoard')
         
         else:
             non_error = form.non_field_errors
