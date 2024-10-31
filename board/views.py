@@ -15,9 +15,13 @@ def index(request):
 def detail(request, text_id):
     text_list = get_object_or_404(Create, pk=text_id)
     comment_list = Comment.objects.filter(comment_id = text_id).order_by('create_date')
+    present_user = request.user
+    create_author = text_list.author
+    user_dict = {'present_user':str(present_user), 'create_author':str(create_author)}
     content = {'text_list':text_list,
                'comment_list':comment_list,
-               'text_id': text_id}
+               'text_id': text_id,
+               'user_dict':user_dict}
     return render(request, 'board/detail.html', content)
 
 @login_required(login_url='member:login')
@@ -28,7 +32,13 @@ def create(request):
            post = form.save(commit=False)
            post.author = request.user
            post = form.save()
-           return redirect(f'/NoticeBoard/{post.id}') 
+           return redirect(f'/NoticeBoard/{post.id}')
+       
+       else:
+            form = CreateForm()
+            context = {'form':form}
+            return render(request, 'board/create.html',context)
+
     else:
         form = CreateForm()
         context = {'form':form}
