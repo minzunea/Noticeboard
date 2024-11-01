@@ -66,12 +66,13 @@ def delete(request, text_id):
     delete_notice.delete()
     return redirect('/NoticeBoard')
 
+@login_required(login_url='member:login')
 def comment_create(request, text_id):
     content={'text_id':text_id}
 
     if request.method == "POST":
         create_instance = get_object_or_404(Create, pk=text_id)
-        new_comment = Comment.objects.create(comment_id=create_instance, contents=request.POST['fcomment'])
+        new_comment = Comment.objects.create(comment_id=create_instance, contents=request.POST['fcomment'], author=request.user)
         return redirect(f'/NoticeBoard/{text_id}')
 
     else:
