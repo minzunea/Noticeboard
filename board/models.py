@@ -15,8 +15,9 @@ class Create(models.Model):
 
 class Comment(models.Model):
     comment_id = models.ForeignKey(Create, on_delete=models.CASCADE, db_column='comment_id') # Create 클래스의 id를 외래키로 참조
-    contents = models.CharField(max_length=100, db_column='contents') 
-    create_date = models.DateTimeField(auto_now_add=True) 
+    contents = models.CharField(max_length=100, db_column='contents')
+    create_date = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=10, db_column='author')
     
     def __str__(self):
         return f"{self.contents},{self.create_date}"
