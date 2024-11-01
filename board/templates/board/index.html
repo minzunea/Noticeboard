@@ -16,7 +16,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='{% url 'noticeboard:detail' text.id %}'" >View</button>
                         </div>
-                        <small class="text-muted">{{text.create_date}}</small>
+                        <small class="text-muted">{{text.author}} - {{text.create_date}}</small>
                     </div>
                 </div>
             </div>
